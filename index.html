@@ -27,17 +27,34 @@
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        const search_params = new URLSearchParams(window.location.search);
-        console.log(search_params.get("UTM"));
-        let link = $("#link").attr('href');
-        if(search_params.has("UTM")){
-            $("#link").attr('href', link + '?UTM=' + search_params.get("UTM"));
+        const urlSearchParams = new URLSearchParams(window.location.search);  
+        let count = 0;     
+        for (const [key, value] of urlSearchParams.entries()) {
+            ++count;
+        }
+        if(count>0){
+            const params = urlSearchParams.toString();   
+            let link = new URL($("#link").attr('href'));
+            const org =  new URLSearchParams(link.search);
+            count = 0;
+            for (const [key, value] of org.entries()) {
+                ++count;
+            }
+            if(count>0)
+                $("#link").attr('href', link + "&" + params.toString());
+            else
+                $("#link").attr('href', link + "?" + params.toString());
         }
     });
+
 </script>
 
 <body>
-    <a id="link" href="https://www.google.com/">Ridirect to Google with UTM</a>
+    <p>
+        <a id="link" href="https://www.google.com/">Ridirect to Google with All params</a>
+    <p>
+    <!--a id="link" href="https://www.google.com/">Ridirect to Google with UTM</a-->
+
 </body>
 
 </html>
