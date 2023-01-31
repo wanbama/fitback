@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .sign_btn {
+        height: 80px;
+        width: 200px;
+        border: 1px solid #000;
+    }
+
+    #signIn_result {
+        border: 1px solid #000;
+        word-wrap: break-word;
+    }
+
+    #signInTest {
+        border: 1px solid #000;
+        word-wrap: break-word;
+    }
+</style>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        const search_params = new URLSearchParams(window.location.search);
+        console.log(search_params.get("UTM"));
+        let link = $("#link").attr('href');
+        if(search_params.has("UTM")){
+            $("#link").attr('href', link + '?UTM=' + search_params.get("UTM"));
+        }
+    });
+</script>
+
+<body>
+    <a id="link" href="https://www.google.com/">Ridirect to Google with UTM</a>
+</body>
+
+</html>
